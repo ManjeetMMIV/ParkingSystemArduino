@@ -1,0 +1,4 @@
+This Project detects objects in the vicinity of Ultrasonic Sensor, if the object/car is under a specified distance as in the code
+then the servo motor rotates it's arm by 90 degrees and stays in that position and then returns back to  the previous position.
+Thus resembling the parking systems as found near tolls etc.
+Changing the mechanism with no changes in the code can be made into a smartbin project as well which opens the lid when the garbage is detected.
