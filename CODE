@@ -1,0 +1,51 @@
+#include <ESP32Servo.h>
+
+const int trigPin = 5; // GPIO pin for the ultrasonic sensor trig
+const int echoPin = 18; // GPIO pin for the ultrasonic sensor echo
+const int servoPin = 2; // GPIO pin for the servo motor
+
+Servo myServo;
+
+long duration;
+int distance;
+
+int threshold = 20; // Distance threshold in centimeters
+
+void setup() {
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  myServo.attach(servoPin);
+  myServo.write(0); // Initial position
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Clear the trigPin
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+
+  // Print the distance on the Serial Monitor
+  Serial.print("Distance: ");
+
+  // Send a 10us pulse to the trigPin
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Read the echoPin, returns the sound wave travel time in microseconds
+  duration = pulseIn(echoPin, HIGH);
+
+  // Calculate the distance (cm)
+  distance = duration * 0.034 / 2;
+
+  Serial.println(distance);
+
+  // Check if the distance is below the threshold
+  if (distance < threshold) {
+    myServo.write(90); // Move servo to 90 degrees
+  } else {
+    myServo.write(0); // Move servo back to 0 degrees
+  }
+
+  delay(500); // Wait for half a second before repeating
+}
