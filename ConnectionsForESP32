@@ -1,0 +1,11 @@
+Connections for  Ultrasonic:
+ Trig - D5
+ Echo - 18
+ Vcc - 5V
+ GND - GND
+Connections for Servo Motor(SRG90):
+ Vcc - 3.3V
+ GND - GND
+ Output - D2
+
+Please note Vin is 5V in ESP32
